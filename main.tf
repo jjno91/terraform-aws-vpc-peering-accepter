@@ -1,6 +1,7 @@
 resource "aws_vpc_peering_connection_accepter" "this" {
   vpc_peering_connection_id = "${var.vpc_peering_connection_id}"
-  tags          = "${merge(map("Name", "${var.env}-peer-${var.peer_env}"), map("Type", "Accepter"), var.tags)}"
+  auto_accept               = true
+  tags                      = "${merge(map("Name", "${var.env}-peer-${var.peer_env}"), map("Type", "Accepter"), var.tags)}"
 }
 
 resource "aws_route" "this" {
