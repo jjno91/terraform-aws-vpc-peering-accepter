@@ -23,13 +23,14 @@ locals {
 }
 
 module "vpc_peering_accepter" {
-  source              = "github.com/jjno91/terraform-aws-vpc-peering-accepter?ref=master"
-  env                 = "${var.env}"
-  vpc_id              = "my-vpc"
-  vpc_route_tables    = ["${var.route_tables}"]
-  peer_env            = "core-us-dev"
-  peer_vpc_cidr_block = "${var.first_cidr}"
-  tags                = "${local.tags}"
+  source                    = "github.com/jjno91/terraform-aws-vpc-peering-accepter?ref=master"
+  env                       = "${var.env}"
+  vpc_peering_connection_id = "pcx-123abc"
+  vpc_id                    = "my-vpc"
+  vpc_route_tables          = ["${var.route_tables}"]
+  peer_env                  = "core-us-dev"
+  peer_vpc_cidr_block       = "${var.first_cidr}"
+  tags                      = "${local.tags}"
 }
 
 # if the VPC you are peering with has more than one CIDR associated
