@@ -30,7 +30,7 @@ resource "aws_security_group_rule" "ingress" {
   from_port         = 0
   to_port           = 0
   protocol          = "-1"
-  security_group_id = "${element(aws_security_group.this.*.id, count.index)}"
+  security_group_id = "${element(concat(aws_security_group.this.*.id, list("")), count.index)}"
   cidr_blocks       = ["${var.peer_vpc_cidr_block}"]
 }
 
@@ -41,6 +41,6 @@ resource "aws_security_group_rule" "egress" {
   from_port         = 0
   to_port           = 0
   protocol          = "-1"
-  security_group_id = "${element(aws_security_group.this.*.id, count.index)}"
+  security_group_id = "${element(concat(aws_security_group.this.*.id, list("")), count.index)}"
   cidr_blocks       = ["${var.peer_vpc_cidr_block}"]
 }
