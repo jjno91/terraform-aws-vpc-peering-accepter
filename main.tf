@@ -6,7 +6,7 @@ resource "aws_vpc_peering_connection_accepter" "this" {
 }
 
 resource "aws_route" "this" {
-  count                     = "${var.create ? length(var.vpc_route_tables) : 0}"
+  count                     = "${var.create ? var.route_count : 0}"
   route_table_id            = "${element(var.vpc_route_tables, count.index)}"
   destination_cidr_block    = "${var.peer_vpc_cidr_block}"
   vpc_peering_connection_id = "${var.vpc_peering_connection_id}"
